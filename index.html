@@ -1,18 +1,36 @@
-<!-- Step 4: Confirmation -->
-<div id="step-4" class="step">
-    <h2>It's a Date! 🎉</h2>
-    <div class="summary-box">
-        <!-- The form wraps your confirmation details -->
-        <form id="invite-form" action="https://formspree.io/f/mzdlbdvy" method="POST">
+<div class="card">
+    <div id="step-1" class="step active">
+        <h2>Ready for Date #2? ✨</h2>
+        <p>I had a great time and would love to see you again.</p>
+        <div class="button-container">
+            <button id="btn-yes" onclick="goStep(2)">Yes!</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
+
+    <div id="step-2" class="step">
+        <h2>Pick a Time 🗓️</h2>
+        <p>When are you free?</p>
+        <input type="datetime-local" id="datetime-picker">
+        <button onclick="saveTime()">Next ➡️</button>
+    </div>
+
+    <div id="step-3" class="step">
+        <h2>What's the vibe? 🎯</h2>
+        <div class="grid">
+            <button onclick="saveActivity('Dinner')"><span>🍝</span> Dinner</button>
+            <button onclick="saveActivity('Movie')"><span>🍿</span> Movie</button>
+            <button onclick="saveActivity('Coffee')"><span>☕</span> Coffee</button>
+            <button onclick="saveActivity('Walk in the Park')"><span>🌳</span> Walk</button>
+        </div>
+    </div>
+
+    <div id="step-4" class="step">
+        <h2>It's a Date! 🎉</h2>
+        <div class="summary-box">
             <p><strong>🕒 When:</strong> <span id="display-time"></span></p>
-            <!-- These hidden inputs hold the data that gets emailed to you -->
-            <input type="hidden" name="Date-Time" id="input-time">
-            
             <p><strong>🎯 What:</strong> <span id="display-activity"></span></p>
-            <input type="hidden" name="Activity" id="input-activity">
-            
-            <!-- This button submits the form to your email -->
-            <button type="submit" id="btn-submit">Confirm and Send to Me!</button>
-        </form>
+        </div>
+        <button onclick="copyPlan()">📋 Copy Plan to send to me!</button>
     </div>
 </div>
