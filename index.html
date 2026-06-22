@@ -9,10 +9,12 @@
 </head>
 <body>
 
+<div id="hearts"></div>
+
 <div class="card">
     <div class="step active" id="step1">
         <h1 id="typing"></h1>
-        <p>Hi Rajismita!!! I would love to go on a date with you ❤️</p>
+        <p>I would love to go on a date with you ❤️</p>
         <div class="buttons">
             <button class="yes" onclick="yesClicked()">Yes ❤️</button>
             <button class="no" id="noBtn">No 🙈</button>
@@ -20,11 +22,9 @@
     </div>
 
     <div class="step" id="step2">
-        <h2>📅 Pick Date & Time</h2>
-        <div class="date-time-picker">
-            <input type="date" id="date">
-            <input type="time" id="time" step="3600">
-        </div>
+        <h2>📅 Pick a Date & Time</h2>
+        <input type="date" id="date">
+        <input type="time" id="time">
         <button class="next" onclick="nextStep(3)">Next →</button>
     </div>
 
@@ -37,6 +37,8 @@
             <div class="activity">🌇 Sunset Walk</div>
             <div class="activity">🎳 Bowling</div>
             <div class="activity">🎡 Fun Fair</div>
+            <div class="activity">🍦 Ice Cream</div>
+            <div class="activity">🎨 Art Museum</div>
         </div>
         <button class="next" onclick="showConfirmation()">Confirm ❤️</button>
     </div>
