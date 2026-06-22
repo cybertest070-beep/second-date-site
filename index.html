@@ -1,36 +1,238 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Date Invitation 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffd6e8,#ffe8f3);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#444;
+}
+
+.card{
+    width:90%;
+    max-width:600px;
+    background:white;
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+h1{
+    color:#ff4f93;
+    margin-bottom:20px;
+}
+
+.step{
+    display:none;
+}
+
+.step.active{
+    display:block;
+}
+
+.btn{
+    border:none;
+    padding:12px 24px;
+    margin:10px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.yes{
+    background:#ff4f93;
+    color:white;
+}
+
+.no{
+    background:#f3d0df;
+    color:#444;
+    position:relative;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+.activities{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.activity{
+    background:#ffe1ef;
+    padding:15px;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.activity.selected{
+    background:#ff4f93;
+    color:white;
+}
+
+.summary{
+    text-align:left;
+    margin-top:20px;
+    background:#fff0f7;
+    padding:20px;
+    border-radius:15px;
+}
+
+.copy-btn{
+    background:#ff4f93;
+    color:white;
+    margin-top:20px;
+}
+</style>
+</head>
+<body>
+
 <div class="card">
-    <div id="step-1" class="step active">
-        <h2>Ready for Date #2? ✨</h2>
-        <p>I had a great time and would love to see you again.</p>
-        <div class="button-container">
-            <button id="btn-yes" onclick="goStep(2)">Yes!</button>
-            <button id="btn-no">No</button>
-        </div>
-    </div>
 
-    <div id="step-2" class="step">
-        <h2>Pick a Time 🗓️</h2>
-        <p>When are you free?</p>
-        <input type="datetime-local" id="datetime-picker">
-        <button onclick="saveTime()">Next ➡️</button>
-    </div>
+<!-- STEP 1 -->
+<div class="step active" id="step1">
+    <h1>💖 Will You Go On A Second Date With Me?</h1>
 
-    <div id="step-3" class="step">
-        <h2>What's the vibe? 🎯</h2>
-        <div class="grid">
-            <button onclick="saveActivity('Dinner')"><span>🍝</span> Dinner</button>
-            <button onclick="saveActivity('Movie')"><span>🍿</span> Movie</button>
-            <button onclick="saveActivity('Coffee')"><span>☕</span> Coffee</button>
-            <button onclick="saveActivity('Walk in the Park')"><span>🌳</span> Walk</button>
-        </div>
-    </div>
+    <button class="btn yes" onclick="nextStep(2)">
+        Yes ❤️
+    </button>
 
-    <div id="step-4" class="step">
-        <h2>It's a Date! 🎉</h2>
-        <div class="summary-box">
-            <p><strong>🕒 When:</strong> <span id="display-time"></span></p>
-            <p><strong>🎯 What:</strong> <span id="display-activity"></span></p>
-        </div>
-        <button onclick="copyPlan()">📋 Copy Plan to send to me!</button>
-    </div>
+    <button class="btn no" id="noBtn">
+        No 🙈
+    </button>
 </div>
+
+<!-- STEP 2 -->
+<div class="step" id="step2">
+    <h1>📅 Pick Date & Time</h1>
+
+    <input type="date" id="date">
+    <input type="time" id="time">
+
+    <br><br>
+
+    <button class="btn yes" onclick="nextStep(3)">
+        Next →
+    </button>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" id="step3">
+    <h1>✨ Choose An Activity</h1>
+
+    <div class="activities">
+        <div class="activity">🍽 Dinner</div>
+        <div class="activity">🎬 Movie</div>
+        <div class="activity">☕ Coffee</div>
+        <div class="activity">🌇 Sunset Walk</div>
+        <div class="activity">🎳 Bowling</div>
+        <div class="activity">🎡 Fun Date</div>
+    </div>
+
+    <br>
+
+    <button class="btn yes" onclick="showConfirmation()">
+        Confirm ❤️
+    </button>
+</div>
+
+<!-- STEP 4 -->
+<div class="step" id="step4">
+    <h1>🎉 Date Confirmed!</h1>
+
+    <div class="summary" id="summary"></div>
+
+    <button class="btn copy-btn" onclick="copyPlan()">
+        Copy Date Plan 📋
+    </button>
+</div>
+
+</div>
+
+<script>
+
+function nextStep(step){
+    document.querySelectorAll('.step')
+    .forEach(s=>s.classList.remove('active'));
+
+    document.getElementById('step'+step)
+    .classList.add('active');
+}
+
+const noBtn = document.getElementById('noBtn');
+
+noBtn.addEventListener('mouseover',()=>{
+    const x=Math.random()*250-125;
+    const y=Math.random()*120-60;
+
+    noBtn.style.transform=
+        `translate(${x}px,${y}px)`;
+});
+
+let selectedActivity='';
+
+document.querySelectorAll('.activity').forEach(item=>{
+    item.addEventListener('click',()=>{
+
+        document.querySelectorAll('.activity')
+        .forEach(a=>a.classList.remove('selected'));
+
+        item.classList.add('selected');
+        selectedActivity=item.innerText;
+    });
+});
+
+function showConfirmation(){
+
+    const date=document.getElementById('date').value;
+    const time=document.getElementById('time').value;
+
+    document.getElementById('summary').innerHTML=`
+        <h3>💖 Our Date Plan</h3>
+        <br>
+        <strong>Date:</strong> ${date}<br><br>
+        <strong>Time:</strong> ${time}<br><br>
+        <strong>Activity:</strong> ${selectedActivity}
+    `;
+
+    nextStep(4);
+}
+
+function copyPlan(){
+
+    const text=document.getElementById('summary')
+    .innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Date plan copied! 💕");
+}
+</script>
+
+</body>
+</html>
+```
