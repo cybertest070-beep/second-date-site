@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Date Invitation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<div id="hearts"></div>
+
+<div class="card">
+    <div class="step active" id="step1">
+        <h1 id="typing"></h1>
+        <p>I would love to go on a date with you ❤️</p>
+        <div class="buttons">
+            <button class="yes" onclick="yesClicked()">Yes ❤️</button>
+            <button class="no" id="noBtn">No 🙈</button>
+        </div>
+    </div>
+
+    <div class="step" id="step2">
+        <h2>📅 Pick a Date & Time</h2>
+        <input type="date" id="date">
+        <input type="time" id="time">
+        <button class="next" onclick="nextStep(3)">Next →</button>
+    </div>
+
+    <div class="step" id="step3">
+        <h2>✨ Choose an Activity</h2>
+        <div class="activities">
+            <div class="activity">🍽 Dinner</div>
+            <div class="activity">🎬 Movie</div>
+            <div class="activity">☕ Coffee</div>
+            <div class="activity">🌇 Sunset Walk</div>
+            <div class="activity">🎳 Bowling</div>
+            <div class="activity">🎡 Fun Fair</div>
+            <div class="activity">🍦 Ice Cream</div>
+            <div class="activity">🎨 Art Museum</div>
+        </div>
+        <button class="next" onclick="showConfirmation()">Confirm ❤️</button>
+    </div>
+
+    <div class="step" id="step4">
+        <h1>🎉 It's a Date!</h1>
+        <div id="summary"></div>
+        <form action="https://formspree.io/f/mzdlbdvy" method="POST">
+            <input type="hidden" name="Date" id="final-date">
+            <input type="hidden" name="Time" id="final-time">
+            <input type="hidden" name="Activity" id="final-activity">
+            <button type="submit" class="next">Send Plan to Me! 💌</button>
+        </form>
+        <button class="next" onclick="copyPlan()" style="background:#666;">📋 Copy Plan</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
